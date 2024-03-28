@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .calculator {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
+        table {
+            height: 400px;
+            width: 250px;
+        }
+        .tag {
+            border: 2px solid black;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tagoutput{
+            width: 250px;
+            height: 100px;
+        }
+
+        .color {
+            background-color: rgb(63, 63, 66);
+            color: white;
+        }
+
+        button {
+            background-color: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .realoutput{
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <table class="tag" cellpadding="10px" cellspacing="10px">
+            <tr class="tag tagoutput" >
+                <th class="tag realoutput" colspan="4"></th>
+            </tr>
+            <tr class="tag color">
+                <td class="tag" onclick="earse()"><button class="color">AC</button></td>
+                <td class="tag" onclick="last()"><button class="color">←</button></td>
+                <td class="tag"><button class="color">+/-</button></td>
+                <td class="tag" onclick="selectNumber('/');"><button class="color">/</button></td>
+            </tr>
+            <tr class="tag">
+                <td class="tag"  onclick="selectNumber('7');"><button>7</button></td>
+                <td class="tag"  onclick="selectNumber('8');"><button>8</button></td>
+                <td class="tag" onclick="selectNumber('9');"><button>9</button></td>
+                <td class="tag color" onclick="selectNumber('*');"><button class="color">*</button></td>
+            </tr>
+            <tr class="tag">
+                <td class="tag" onclick="selectNumber('4');"><button>4</button></td>
+                <td class="tag" onclick="selectNumber('5');"><button>5</button></td>
+                <td class="tag" onclick="selectNumber('6');"><button>6</button></td>
+                <td class="tag color" onclick="selectNumber('-');"><button class="color">-</button></td>
+            </tr>
+            <tr class="tag">
+                <td class="tag" onclick="selectNumber('1');"><button>1</button></td>
+                <td class="tag" onclick="selectNumber('2');"><button>2</button></td>
+                <td class="tag" onclick="selectNumber('3');"><button>3</button></td>
+                <td class="tag color" onclick="selectNumber('+');"><button class="color">+</button></td>
+            </tr>
+            <tr class="tag">
+                <td class="tag" onclick="selectNumber('%');"><button>%</button></td>
+                <td class="tag" onclick="selectNumber('0');"><button>0</button></td>
+                <td class="tag" onclick="selectNumber('.');"><button>.</button></td>
+                <td class="tag color" onclick="showResult()"><button class="color">=</button></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        let temp;
+
+        document.addEventListener('keypress', function(event) {
+        const keyPressed = event.key;
+
+        if (keyPressed === 'Enter') {z
+            showResult();
+        } else if (keyPressed === 'Backspace') {
+            last();
+        } else if (keyPressed === 'Backspace') {
+            erase();
+        }
+        else {
+            selectNumber(keyPressed);
+        }
+    });
+        function last() {
+            temp = document.querySelector(".realoutput").innerHTML = temp.substring(-1, temp.length-1);
+        }
+        function earse(){
+            document.querySelector(".realoutput").innerHTML = "";
+        }
+        function selectNumber(selection) {
+            temp = document.querySelector(".realoutput").innerHTML += selection;
+        }
+
+        function showResult() {
+            temp = document.querySelector(".realoutput").innerHTML = eval(temp);
+        }        
+    </script>
+</body>
+</html>
